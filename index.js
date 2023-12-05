@@ -195,6 +195,7 @@ const parser = new htmlParser.Parser(new htmlParser.DefaultHandler(handleFn));
 
 const parseHtml = (html) => {
     parser.parseComplete(html); //returns undefined...
+    console.log(transformed);
     return transformed;
 };
 
