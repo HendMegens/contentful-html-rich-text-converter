@@ -40,9 +40,11 @@ const transformDom = (dom) => {
 
     R.forEach((elm) => {
         //RTF Tables in Contentful. Contentful currently pass a 'tbody' tag which isn't supported when importing. This removes it from the hierarchy.
-        // if (elm?.children?.[0].name == 'tbody') {
-        // elm.children.splice(0, 1, ...elm.children[0].children);
-        // }
+        if (elm && elm.children && elm.children.length) {
+            if (elm.children[0].name == "tbody") {
+                elm.children.splice(0, 1, ...elm.children[0].children);
+            }
+        }
 
         const { type, name, data, attribs, children } = elm;
         //console.log(elm);
@@ -195,7 +197,6 @@ const parser = new htmlParser.Parser(new htmlParser.DefaultHandler(handleFn));
 
 const parseHtml = (html) => {
     parser.parseComplete(html); //returns undefined...
-    console.log("transformed:", transformed);
     return transformed;
 };
 
